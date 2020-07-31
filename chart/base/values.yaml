@@ -10,10 +10,10 @@ profiles:
   active: ocp
 
 credentials:
-  dbusername: "Ym9va2luZ21zZGI="
-  dbpassword: "Ym9va2luZ21zZGI="
-  mqusername: "YXBwdXNlcg=="
-  mqpassword: "cGFzc3cwcmQ="
+  dbusername: "bookingmsdb"
+  dbpassword: "bookingmsdb"
+  mqusername: "appuser"
+  mqpassword: "passw0rd"
 
 datasources:
   dburl: "jdbc:mysql://mysql-dev:3306/bookingmsdb?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=EST"
@@ -51,11 +51,11 @@ ingress:
 #  tlsSecretName: ""
 
 vcsInfo:
-  repoUrl: "https://github.com/abalasu1/cargotracker-booking.git"
+  repoUrl: "https://github.com/tcs-sandbox-team-one/cargotracker-org-booking.git"
   branch: "master"
 
 partOf: "cargotracker-backend-dev"
 
-connectsTo: "mysql-dev, rabbitmq-dev, cargotracker-routing"
+connectsTo: "mysql-dev, rabbitmq-dev, cargotracker-org-routing"
 
 runtime: spring
