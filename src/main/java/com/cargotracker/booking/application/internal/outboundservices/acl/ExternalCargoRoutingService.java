@@ -32,6 +32,11 @@ public class ExternalCargoRoutingService {
     public CargoItinerary fetchRouteForSpecification(RouteSpecification routeSpecification){
         RestTemplate restTemplate = new RestTemplate();
         Map<String,Object> params = new HashMap<>();
+        
+        System.out.println("007007 origin " +routeSpecification.getOrigin().getUnLocCode());
+        System.out.println("007007 destination " + routeSpecification.getDestination().getUnLocCode());
+        System.out.println("007007 arrivalDeadline " + routeSpecification.getArrivalDeadline().toString());
+        
         params.put("origin",routeSpecification.getOrigin().getUnLocCode());
         params.put("destination",routeSpecification.getDestination().getUnLocCode());
         params.put("arrivalDeadline",routeSpecification.getArrivalDeadline().toString());
@@ -39,13 +44,23 @@ public class ExternalCargoRoutingService {
         String host = "cargotracker-org-routing";
         if (activeProfile.equals("local")) host = "localhost:8003";
         
-        TransitPath transitPath = restTemplate.getForObject("http://" + host + "/cargorouting/optimalRoute?origin=&destination=&deadline=",
+        String hostURL = "http://" + host + "/cargorouting/optimalRoute?origin=&destination=&deadline=";
+        
+        System.out.println("007007 host : " + host );
+        
+        TransitPath transitPath = restTemplate.getForObject(hostURL,
                     TransitPath.class,params);
+        
+        
 
 
         List<Leg> legs = new ArrayList<>(transitPath.getTransitEdges().size());
+        
+        
+        
         for (TransitEdge edge : transitPath.getTransitEdges()) {
             legs.add(toLeg(edge));
+            System.out.println("007007 Edge : " + edge);
         }
 
         return new CargoItinerary(legs);
