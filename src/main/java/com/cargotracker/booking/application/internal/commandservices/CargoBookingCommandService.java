@@ -42,8 +42,9 @@ public class CargoBookingCommandService {
         Cargo cargo = new Cargo(bookCargoCommand);
         
         cargoRepository.save(cargo);
-        return new BookingId(random);
+        return new BookingId(random.substring(0, random.indexOf("-")));
     }
+   
 
     /**
      * Service Command method to assign a route to a Cargo
